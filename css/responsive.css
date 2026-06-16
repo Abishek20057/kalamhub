@@ -1,0 +1,102 @@
+/* =========================
+   TABLET DEVICES
+========================= */
+
+@media (max-width: 992px) {
+
+    .hero h1{
+        font-size:55px;
+    }
+
+    .hero h2{
+        font-size:28px;
+    }
+
+    .service-container,
+    .project-container{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+/* =========================
+   MOBILE DEVICES
+========================= */
+
+@media (max-width:768px){
+
+    .navbar{
+        flex-direction:column;
+        padding:15px;
+    }
+
+    .nav-links{
+        gap:15px;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .hero{
+        padding:140px 20px 80px;
+    }
+
+    .hero h1{
+        font-size:42px;
+    }
+
+    .hero h2{
+        font-size:22px;
+    }
+
+    .hero p{
+        font-size:15px;
+    }
+
+    .hero-buttons{
+        flex-direction:column;
+        align-items:center;
+    }
+
+    .btn-primary,
+    .btn-secondary{
+        width:220px;
+        text-align:center;
+    }
+
+    .service-container,
+    .project-container{
+        grid-template-columns:1fr;
+    }
+
+    .about h2,
+    .services h2,
+    .projects h2,
+    .contact h2{
+        font-size:32px;
+    }
+
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width:480px){
+
+    .hero h1{
+        font-size:34px;
+    }
+
+    .hero h2{
+        font-size:18px;
+    }
+
+    .logo{
+        font-size:22px;
+    }
+
+    .nav-links a{
+        font-size:14px;
+    }
+
+}

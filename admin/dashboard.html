@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kalam Hub Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+}
+
+.sidebar{
+    position:fixed;
+    left:0;
+    top:0;
+    width:250px;
+    height:100vh;
+    background:#0f172a;
+    color:white;
+    padding:30px 20px;
+}
+
+.sidebar h2{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.sidebar ul{
+    list-style:none;
+}
+
+.sidebar ul li{
+    margin:20px 0;
+}
+
+.sidebar ul li a{
+    color:white;
+    text-decoration:none;
+    display:block;
+    padding:12px;
+    border-radius:10px;
+    transition:.3s;
+}
+
+.sidebar ul li a:hover{
+    background:#2563eb;
+}
+
+.main{
+    margin-left:250px;
+    padding:30px;
+}
+
+.header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:30px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.card h3{
+    color:#64748b;
+    margin-bottom:10px;
+    font-size:16px;
+}
+
+.card h1{
+    color:#2563eb;
+    font-size:32px;
+}
+
+.table-box{
+    background:white;
+    margin-top:30px;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.table-box h2{
+    margin-bottom:20px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+table th,
+table td{
+    padding:15px;
+    text-align:left;
+    border-bottom:1px solid #eee;
+}
+
+table th{
+    background:#2563eb;
+    color:white;
+}
+
+.loading{
+    text-align:center;
+    padding:20px;
+    color:#666;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+    <h2>Kalam Hub</h2>
+
+    <ul>
+
+        <li><a href="dashboard.html">📊 Dashboard</a></li>
+
+        <li><a href="projects.html">📁 Projects</a></li>
+
+        <li><a href="customers.html">👥 Customers</a></li>
+
+        <li><a href="inquiries.html">📩 Inquiries</a></li>
+
+        <li><a href="payments.html">💰 Payments</a></li>
+        
+        <li><a href="../index.html">🌐 Website</a></li>
+        
+        <li><a href="#" onclick="logout()">🚪 Logout</a></li>
+        <li>
+<a href="#" onclick="logout()">
+🚪 Logout
+</a>
+</li>
+    </ul>
+
+</div>
+
+<div class="main">
+
+    <div class="header">
+
+        <h1>Admin Dashboard</h1>
+
+        <h3>Welcome Admin</h3>
+
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Total Projects</h3>
+            <h1 id="totalProjects">0</h1>
+        </div>
+
+        <div class="card">
+            <h3>Total Customers</h3>
+            <h1 id="totalCustomers">0</h1>
+        </div>
+
+        <div class="card">
+            <h3>Total Inquiries</h3>
+            <h1 id="totalInquiries">0</h1>
+        </div>
+
+        <div class="card">
+            <h3>Total Revenue</h3>
+            <h1 id="totalRevenue">₹0</h1>
+        </div>
+
+    </div>
+
+    <div class="table-box">
+
+        <h2>Recent Project Requests</h2>
+
+        <table>
+
+            <thead>
+
+                <tr>
+                    <th>Name</th>
+                    <th>Project</th>
+                    <th>Phone</th>
+                    <th>Date</th>
+                </tr>
+
+            </thead>
+
+            <tbody id="recentRequestsTable">
+
+                <tr>
+                    <td colspan="4" class="loading">
+                        Loading data...
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+<script>
+
+const WEB_APP_URL =
+"https://script.google.com/macros/s/AKfycbyCkmRwo8kA8TyALX50UKMnOCorLwObJ27a5XCC0-EAEoDNEv1sW0wZwKwE70UNzBOZOA/exec";
+
+document.addEventListener(
+    "DOMContentLoaded",
+    loadDashboard
+);
+
+async function loadDashboard(){
+
+    try{
+
+        const response =
+        await fetch(
+            `${WEB_APP_URL}?action=getDashboardStats`
+        );
+
+        const data =
+        await response.json();
+
+        document.getElementById(
+            "totalProjects"
+        ).textContent =
+        data.totalProjects || 0;
+
+        document.getElementById(
+            "totalCustomers"
+        ).textContent =
+        data.totalCustomers || 0;
+
+        document.getElementById(
+            "totalInquiries"
+        ).textContent =
+        data.totalInquiries || 0;
+
+        document.getElementById(
+            "totalRevenue"
+        ).textContent =
+        "₹" + (data.totalRevenue || 0);
+
+        renderRecentRequests(
+            data.recentRequests || []
+        );
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        document.getElementById(
+            "recentRequestsTable"
+        ).innerHTML =
+        `
+        <tr>
+            <td colspan="4">
+                Failed to load dashboard data
+            </td>
+        </tr>
+        `;
+    }
+
+}
+
+function renderRecentRequests(requests){
+
+    const table =
+    document.getElementById(
+        "recentRequestsTable"
+    );
+
+    table.innerHTML = "";
+
+    if(requests.length === 0){
+
+        table.innerHTML =
+        `
+        <tr>
+            <td colspan="4">
+                No requests found
+            </td>
+        </tr>
+        `;
+
+        return;
+    }
+
+    requests.forEach(row => {
+
+        const tr =
+        document.createElement("tr");
+
+       tr.innerHTML =
+`
+<td>${row[2] || ""}</td>
+<td>${row[5] || ""}</td>
+<td>${row[4] || ""}</td>
+<td>${formatDate(row[1])}</td>
+`;
+
+        table.appendChild(tr);
+
+    });
+
+}
+function formatDate(dateValue){
+
+    if(!dateValue) return "";
+
+    const date = new Date(dateValue);
+
+    return date.toLocaleDateString(
+        "en-IN",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
+}
+if(
+    localStorage.getItem(
+        "loggedIn"
+    ) !== "true"
+){
+    window.location.href =
+    "login.html";
+}
+function logout(){
+
+    localStorage.removeItem(
+        "loggedIn"
+    );
+
+    window.location.href =
+    "login.html";
+}
+if(localStorage.getItem("loggedIn") !== "true"){
+    window.location.href = "login.html";
+}
+</script>
+
+</body>
+</html>

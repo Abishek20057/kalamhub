@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Invoices | Kalam Hub</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f5f7fb;
+}
+
+.sidebar{
+position:fixed;
+left:0;
+top:0;
+width:250px;
+height:100vh;
+background:#0f172a;
+padding:25px;
+color:white;
+}
+
+.sidebar h2{
+margin-bottom:30px;
+text-align:center;
+}
+
+.sidebar a{
+display:block;
+color:white;
+text-decoration:none;
+padding:12px;
+margin:8px 0;
+border-radius:10px;
+}
+
+.sidebar a:hover{
+background:#2563eb;
+}
+
+.main{
+margin-left:250px;
+padding:30px;
+}
+
+.invoice-box{
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,0.08);
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+th,td{
+padding:15px;
+border-bottom:1px solid #eee;
+text-align:left;
+}
+
+th{
+background:#2563eb;
+color:white;
+}
+
+.btn{
+padding:8px 14px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+color:white;
+}
+
+.view{
+background:#2563eb;
+}
+
+.print{
+background:#10b981;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="sidebar">
+
+<h2>Kalam Hub</h2>
+
+<a href="dashboard.html">Dashboard</a>
+<a href="projects.html">Projects</a>
+<a href="customers.html">Customers</a>
+<a href="inquiries.html">Inquiries</a>
+<a href="payments.html">Payments</a>
+<a href="invoices.html">Invoices</a>
+<a href="#" onclick="logout()">Logout</a>
+</div>
+
+<div class="main">
+
+<h1>Invoice Management</h1>
+
+<br>
+
+<div class="invoice-box">
+
+<table>
+
+<tr>
+<th>Invoice No</th>
+<th>Customer</th>
+<th>Amount</th>
+<th>Date</th>
+<th>Action</th>
+</tr>
+
+<tr>
+<td>KH-001</td>
+<td>Latha</td>
+<td>₹100</td>
+<td>15-06-2026</td>
+
+<td>
+<button class="btn view">View</button>
+<button class="btn print">Print</button>
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+</div>
+
+</body>
+</html>
