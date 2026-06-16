@@ -24,7 +24,7 @@
     <nav class="navbar">
 
         <div class="logo">
-    <img src="assets/images/kalam-hub-logo.png.jpeg" alt="Kalam Hub">
+    <img src="assets/images/kalam-hub-logo.jpeg" alt="Kalam Hub">
     <span>Kalam Hub</span>
 </div>
 
@@ -66,37 +66,45 @@
 
         <h2>Send Your Project Request</h2>
 
-        <form class="contact-form">
+        <form class="contact-form" id="contactForm">
 
-            <input type="text"
-                   placeholder="Full Name"
-                   required>
+    <input
+        type="text"
+        id="name"
+        placeholder="Full Name"
+        required>
 
-            <input type="email"
-                   placeholder="Email Address"
-                   required>
+    <input
+        type="email"
+        id="email"
+        placeholder="Email Address"
+        required>
 
-            <input type="tel"
-                   placeholder="Phone Number"
-                   required>
+    <input
+        type="tel"
+        id="phone"
+        placeholder="Phone Number"
+        required>
 
-            <input type="text"
-                   placeholder="Project Title"
-                   required>
+    <input
+        type="text"
+        id="project"
+        placeholder="Project Title"
+        required>
 
-            <textarea
-                rows="6"
-                placeholder="Describe Your Project Requirement"
-                required>
-            </textarea>
+    <textarea
+        id="message"
+        rows="6"
+        placeholder="Describe Your Project Requirement"
+        required></textarea>
 
-            <button type="submit"
-                    class="btn-primary">
-                Submit Request
-            </button>
+    <button
+        type="submit"
+        class="btn-primary">
+        Submit Request
+    </button>
 
-        </form>
-
+</form>
     </section>
 
     <!-- Company Info -->
@@ -144,86 +152,10 @@
 
   <script>
 
-const WEB_APP_URL =
-"https://script.google.com/macros/s/AKfycbyCkmRwo8kA8TyALX50UKMnOCorLwObJ27a5XCC0-EAEoDNEv1sW0wZwKwE70UNzBOZOA/exec";
-
-document
-.getElementById("contactForm")
-.addEventListener("submit", async function(e){
-
-    e.preventDefault();
-
-    const data = {
-
-        action:"addInquiry",
-
-        name:
-        document.getElementById("name").value,
-
-        email:
-        document.getElementById("email").value,
-
-        phone:
-        document.getElementById("phone").value,
-
-        project:
-        document.getElementById("project").value,
-
-        message:
-        document.getElementById("message").value
-
-    };
-
-    try{
-
-        const response =
-        await fetch(
-            WEB_APP_URL,
-            {
-                method:"POST",
-                body:JSON.stringify(data)
-            }
-        );
-
-        const result =
-        await response.json();
-
-        if(result.success){
-
-            alert(
-                "Project Request Submitted Successfully"
-            );
-
-            document
-            .getElementById("contactForm")
-            .reset();
-
-        }
-        else{
-
-            alert(
-                "Submission Failed"
-            );
-
-        }
-
-    }
-    catch(error){
-
-        console.error(error);
-
-        alert(
-            "Server Error"
-        );
-
-    }
-
-});
 
 </script>
-
 <script src="js/main.js"></script>
-    <script src="js/contact.js"></script>
+<script src="js/contact.js"></script>
 
 </body>
 
