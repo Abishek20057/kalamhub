@@ -4,6 +4,7 @@
 
 const WEB_APP_URL =
 "https://script.google.com/macros/s/AKfycbyCkmRwo8kA8TyALX50UKMnOCorLwObJ27a5XCC0-EAEoDNEv1sW0wZwKwE70UNzBOZOA/exec";
+
 document.addEventListener("DOMContentLoaded", () => {
 
     const form = document.querySelector(".contact-form");
@@ -14,46 +15,47 @@ document.addEventListener("DOMContentLoaded", () => {
 
         e.preventDefault();
 
-        const name =
-            form.querySelector('input[placeholder="Full Name"]').value;
+        const submitBtn = form.querySelector("button");
 
-        const email =
-            form.querySelector('input[placeholder="Email Address"]').value;
+        submitBtn.innerText = "Sending...";
+        submitBtn.disabled = true;
 
-        const phone =
-            form.querySelector('input[placeholder="Phone Number"]').value;
+        const data = {
+            name: form.querySelector('input[placeholder="Full Name"]').value,
+            email: form.querySelector('input[placeholder="Email Address"]').value,
+            phone: form.querySelector('input[placeholder="Phone Number"]').value,
+            project: form.querySelector('input[placeholder="Project Title"]').value,
+            message: form.querySelector('textarea').value
+        };
 
-        const project =
-            form.querySelector('input[placeholder="Project Title"]').value;
-
-        const description =
-            form.querySelector('textarea').value;
-
-        // Save to Google Sheets
         try {
 
-            await fetch(WEB_APP_URL, {
-    method: "POST",
-    headers: {
-        "Content-Type": "text/plain"
-    },
-    body: JSON.stringify({
-        name,
-        email,
-        phone,
-        project,
-        message: description
-    })
-});
+            const response = await fetch(WEB_APP_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "text/plain"
+                },
+                body: JSON.stringify(data)
+            });
 
+            const result = await response.text();
+
+            console.log(result);
+
+            alert("Project Request Submitted Successfully!");
+
+            form.reset();
 
         } catch (error) {
 
-            console.error("Google Sheet Error:", error);
+            console.error(error);
+
+            alert("Failed to send request. Check Apps Script.");
 
         }
 
-
+        submitBtn.innerText = "Submit Request";
+        submitBtn.disabled = false;
 
     });
 
