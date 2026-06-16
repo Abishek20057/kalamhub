@@ -236,6 +236,16 @@ async function loadProjects(){
         let html = "";
 
         projects.forEach(project => {
+            if(projects.length === 0){
+
+    html = `
+    <tr>
+        <td colspan="7">
+            No Projects Found
+        </td>
+    </tr>
+    `;
+}
 
             let statusClass = "pending";
 
@@ -260,7 +270,7 @@ async function loadProjects(){
                     </span>
                 </td>
 
-                <td>${project[5]}</td>
+                <td>${new Date(project[5]).toLocaleDateString("en-IN")}</td>
 
                 <td>
 
@@ -424,6 +434,13 @@ async function deleteProject(id){
 }
 if(localStorage.getItem("loggedIn") !== "true"){
     window.location.href = "login.html";
+}
+function logout(){
+
+    localStorage.removeItem("loggedIn");
+
+    window.location.href = "login.html";
+
 }
 </script>
 </body>
