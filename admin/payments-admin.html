@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Payments Management | Kalam Hub</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+.container{
+padding:120px 8%;
+}
+
+.page-title{
+margin-bottom:30px;
+}
+
+.page-title h1{
+color:#2563eb;
+}
+
+.form-box{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.1);
+margin-bottom:40px;
+}
+
+.form-box input,
+.form-box select{
+width:100%;
+padding:15px;
+margin-bottom:15px;
+border:1px solid #ddd;
+border-radius:10px;
+}
+
+.form-box button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:10px;
+background:#2563eb;
+color:white;
+font-weight:700;
+cursor:pointer;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-bottom:40px;
+}
+
+.stat-card{
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.1);
+text-align:center;
+}
+
+.stat-card h2{
+font-size:32px;
+color:#2563eb;
+margin-bottom:10px;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,.1);
+}
+
+th{
+background:#2563eb;
+color:white;
+padding:15px;
+}
+
+td{
+padding:15px;
+border-bottom:1px solid #eee;
+}
+
+.action-btn{
+padding:8px 15px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+color:white;
+margin-right:5px;
+}
+
+.edit-btn{
+background:#22c55e;
+}
+
+.delete-btn{
+background:#ef4444;
+}
+
+@media(max-width:768px){
+
+table{
+display:block;
+overflow-x:auto;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<div class="logo">
+
+<img
+src="assets/images/kalam-hub-logo.jpeg"
+alt="Kalam Hub">
+
+<span>Kalam Hub</span>
+
+</div>
+
+<ul class="nav-links">
+
+<li><a href="admin-dashboard.html">Dashboard</a></li>
+<li><a href="projects-admin.html">Projects</a></li>
+<li><a href="customers-admin.html">Customers</a></li>
+<li><a href="payments-admin.html">Payments</a></li>
+
+</ul>
+
+</nav>
+
+<div class="container">
+
+<div class="page-title">
+
+<h1>Payments Management</h1>
+
+<p>
+Track customer payments and revenue.
+</p>
+
+</div>
+
+<div class="stats">
+
+<div class="stat-card">
+
+<h2 id="totalRevenue">
+₹0
+</h2>
+
+<p>Total Revenue</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2 id="totalPayments">
+0
+</h2>
+
+<p>Total Payments</p>
+
+</div>
+
+</div>
+
+<div class="form-box">
+
+<input
+type="text"
+id="customerName"
+placeholder="Customer Name">
+
+<input
+type="text"
+id="projectName"
+placeholder="Project Name">
+
+<input
+type="number"
+id="amount"
+placeholder="Amount">
+
+<select id="status">
+
+<option>Paid</option>
+<option>Pending</option>
+
+</select>
+
+<button onclick="addPayment()">
+
+Add Payment
+
+</button>
+
+</div>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Customer</th>
+<th>Project</th>
+<th>Amount</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="paymentsTable">
+
+<tr>
+
+<td colspan="5">
+
+Loading Payments...
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<script src="js/payments-admin.js"></script>
+<script src="js/logout.js"></script>
+</body>
+
+</html>

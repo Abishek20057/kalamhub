@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kalam Hub Admin Dashboard</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+.dashboard{
+padding:120px 8% 60px;
+}
+
+.dashboard-title{
+text-align:center;
+margin-bottom:40px;
+}
+
+.dashboard-title h1{
+font-size:42px;
+color:#2563eb;
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+margin-bottom:50px;
+}
+
+.stat-card{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.1);
+text-align:center;
+}
+
+.stat-card h2{
+font-size:40px;
+color:#2563eb;
+margin-bottom:10px;
+}
+
+.stat-card p{
+font-size:18px;
+font-weight:600;
+}
+
+.quick-links{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+}
+
+.quick-card{
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.1);
+text-align:center;
+}
+
+.quick-card a{
+display:inline-block;
+margin-top:15px;
+padding:12px 25px;
+background:#2563eb;
+color:white;
+text-decoration:none;
+border-radius:10px;
+font-weight:600;
+}
+
+.recent-section{
+margin-top:60px;
+}
+
+.activity-list{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(300px,1fr));
+gap:25px;
+margin-top:30px;
+}
+
+.activity-card{
+background:white;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+
+.activity-card img{
+width:100%;
+height:220px;
+object-fit:cover;
+}
+
+.activity-card h3{
+padding:20px;
+}
+
+.activity-card p{
+padding:0 20px 20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<div class="logo">
+
+<img
+src="assets/images/kalam-hub-logo.jpeg"
+alt="Kalam Hub">
+
+<span>Kalam Hub</span>
+
+</div>
+
+<ul class="nav-links">
+
+<li><a href="index.html">Website</a></li>
+<li><a href="activity-upload.html">Upload Activity</a></li>
+<li><a href="gallery.html">Gallery</a></li>
+<li>
+<a
+href="#"
+onclick="logout()">
+Logout
+</a>
+</li>
+
+</ul>
+
+</nav>
+
+<section class="dashboard">
+
+<div class="dashboard-title">
+
+<h1>Admin Dashboard</h1>
+
+<p>
+Manage Activities, Projects and Inquiries
+</p>
+
+</div>
+
+<div class="stats-grid">
+
+<div class="stat-card">
+
+<h2 id="totalActivities">
+0
+</h2>
+
+<p>Total Activities</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2 id="totalInquiries">
+0
+</h2>
+
+<p>Total Inquiries</p>
+
+</div>
+
+</div>
+
+<div class="quick-links">
+
+<div class="quick-card">
+
+<h3>Upload Activity</h3>
+
+<a href="activity-upload.html">
+
+Open
+
+</a>
+
+</div>
+
+<div class="quick-card">
+
+<h3>View Gallery</h3>
+
+<a href="gallery.html">
+
+Open
+
+</a>
+
+</div>
+
+<div class="quick-card">
+
+<h3>Contact Requests</h3>
+
+<a href="contact.html">
+
+Open
+
+</a>
+
+</div>
+
+</div>
+
+<div class="recent-section">
+
+<h2>Recent Activities</h2>
+
+<div
+id="recentActivities"
+class="activity-list">
+
+</div>
+
+</div>
+
+</section>
+
+<script src="js/admin-dashboard.js"></script>
+<script src="js/logout.js"></script>
+</body>
+
+</html>

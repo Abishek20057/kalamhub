@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kalam Hub Analytics</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+
+.container{
+padding:120px 8%;
+}
+
+.page-title{
+margin-bottom:40px;
+}
+
+.page-title h1{
+color:#2563eb;
+font-size:40px;
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+margin-bottom:40px;
+}
+
+.stat-card{
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.1);
+text-align:center;
+}
+
+.stat-card h2{
+font-size:38px;
+color:#2563eb;
+margin-bottom:10px;
+}
+
+.chart-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(500px,1fr));
+gap:30px;
+}
+
+.chart-card{
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.1);
+}
+
+.chart-card h3{
+margin-bottom:20px;
+color:#0f172a;
+}
+
+canvas{
+width:100% !important;
+height:350px !important;
+}
+
+@media(max-width:768px){
+
+.chart-grid{
+grid-template-columns:1fr;
+}
+
+canvas{
+height:300px !important;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<div class="logo">
+
+<img
+src="assets/images/kalam-hub-logo.jpeg"
+alt="Kalam Hub">
+
+<span>Kalam Hub</span>
+
+</div>
+
+<ul class="nav-links">
+
+<li><a href="admin-dashboard.html">Dashboard</a></li>
+<li><a href="projects-admin.html">Projects</a></li>
+<li><a href="customers-admin.html">Customers</a></li>
+<li><a href="payments-admin.html">Payments</a></li>
+<li><a href="analytics.html">Analytics</a></li>
+<li><a href="#" onclick="logout()">Logout</a></li>
+<li><a href="testimonial.html">Testimonials</a></li>
+<li><a href="partners.html">Partners</a></li>
+</ul>
+
+</nav>
+
+<div class="container">
+
+<div class="page-title">
+
+<h1>Analytics Dashboard</h1>
+
+<p>
+Business Insights & Performance Tracking
+</p>
+
+</div>
+
+<div class="stats-grid">
+
+<div class="stat-card">
+
+<h2 id="totalProjects">
+0
+</h2>
+
+<p>Total Projects</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2 id="totalCustomers">
+0
+</h2>
+
+<p>Total Customers</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2 id="totalInquiries">
+0
+</h2>
+
+<p>Total Inquiries</p>
+
+</div>
+
+<div class="stat-card">
+
+<h2 id="totalRevenue">
+₹0
+</h2>
+
+<p>Total Revenue</p>
+
+</div>
+
+</div>
+
+<div class="chart-grid">
+
+<div class="chart-card">
+
+<h3>Revenue Analytics</h3>
+
+<canvas id="revenueChart"></canvas>
+
+</div>
+
+<div class="chart-card">
+
+<h3>Business Overview</h3>
+
+<canvas id="overviewChart"></canvas>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="js/logout.js"></script>
+
+<script>
+
+const WEB_APP_URL =
+"https://script.google.com/macros/s/AKfycbyCkmRwo8kA8TyALX50UKMnOCorLwObJ27a5XCC0-EAEoDNEv1sW0wZwKwE70UNzBOZOA/exec";
+
+async function loadAnalytics(){
+
+try{
+
+const response =
+await fetch(
+WEB_APP_URL +
+"?action=getDashboardStats"
+);
+
+const data =
+await response.json();
+
+document.getElementById(
+"totalProjects"
+).innerText =
+data.totalProjects || 0;
+
+document.getElementById(
+"totalCustomers"
+).innerText =
+data.totalCustomers || 0;
+
+document.getElementById(
+"totalInquiries"
+).innerText =
+data.totalInquiries || 0;
+
+document.getElementById(
+"totalRevenue"
+).innerText =
+"₹" +
+(data.totalRevenue || 0);
+
+createCharts(data);
+
+}
+catch(error){
+
+console.error(error);
+
+}
+
+}
+
+function createCharts(data){
+
+new Chart(
+document.getElementById(
+"revenueChart"
+),
+{
+type:"bar",
+data:{
+labels:[
+"Revenue"
+],
+datasets:[{
+label:"Revenue",
+data:[
+data.totalRevenue || 0
+]
+}]
+}
+}
+);
+
+new Chart(
+document.getElementById(
+"overviewChart"
+),
+{
+type:"pie",
+data:{
+labels:[
+"Projects",
+"Customers",
+"Inquiries"
+],
+datasets:[{
+data:[
+data.totalProjects || 0,
+data.totalCustomers || 0,
+data.totalInquiries || 0
+]
+}]
+}
+}
+);
+
+}
+
+loadAnalytics();
+
+</script>
+
+</body>
+
+</html>

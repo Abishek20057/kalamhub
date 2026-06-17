@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Project Management | Kalam Hub</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+.container{
+padding:120px 8%;
+}
+
+.form-box{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.1);
+margin-bottom:40px;
+}
+
+.form-box input,
+.form-box select{
+width:100%;
+padding:15px;
+margin-bottom:15px;
+border:1px solid #ddd;
+border-radius:10px;
+}
+
+.form-box button{
+width:100%;
+padding:15px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-weight:700;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,.1);
+}
+
+th{
+background:#2563eb;
+color:white;
+padding:15px;
+}
+
+td{
+padding:15px;
+border-bottom:1px solid #eee;
+}
+
+.action-btn{
+padding:8px 15px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:600;
+color:white;
+}
+
+.edit-btn{
+background:#22c55e;
+}
+
+.delete-btn{
+background:#ef4444;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<div class="logo">
+
+<img
+src="assets/images/kalam-hub-logo.jpeg"
+alt="Kalam Hub">
+
+<span>Kalam Hub</span>
+
+</div>
+
+<ul class="nav-links">
+
+<li><a href="admin-dashboard.html">Dashboard</a></li>
+<li><a href="projects-admin.html">Projects</a></li>
+
+</ul>
+
+</nav>
+
+<div class="container">
+
+<h1>Project Management</h1>
+
+<div class="form-box">
+
+<input
+type="text"
+id="projectName"
+placeholder="Project Name">
+
+<input
+type="text"
+id="customerName"
+placeholder="Customer Name">
+
+<input
+type="number"
+id="projectCost"
+placeholder="Project Cost">
+
+<select id="projectStatus">
+
+<option>Pending</option>
+<option>Ongoing</option>
+<option>Completed</option>
+<option>Delivered</option>
+
+</select>
+
+<button onclick="addProject()">
+Add Project
+</button>
+
+</div>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Project</th>
+<th>Customer</th>
+<th>Cost</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="projectsTable">
+
+<tr>
+
+<td colspan="5">
+
+Loading...
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<script src="js/projects-admin.js"></script>
+<script src="js/logout.js"></script>
+</body>
+
+</html>

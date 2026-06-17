@@ -5,57 +5,95 @@
 const WEB_APP_URL =
 "https://script.google.com/macros/s/AKfycbyCkmRwo8kA8TyALX50UKMnOCorLwObJ27a5XCC0-EAEoDNEv1sW0wZwKwE70UNzBOZOA/exec";
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", function () {
 
-    const form = document.querySelector(".contact-form");
+    const form =
+    document.getElementById("contactForm");
 
     if (!form) return;
 
-    form.addEventListener("submit", async (e) => {
+    form.addEventListener("submit", async function (e) {
 
         e.preventDefault();
 
-        const submitBtn = form.querySelector("button");
+        const submitBtn =
+        form.querySelector("button");
 
-        submitBtn.innerText = "Sending...";
         submitBtn.disabled = true;
+        submitBtn.innerText = "Sending...";
 
         const data = {
-            name: form.querySelector('input[placeholder="Full Name"]').value,
-            email: form.querySelector('input[placeholder="Email Address"]').value,
-            phone: form.querySelector('input[placeholder="Phone Number"]').value,
-            project: form.querySelector('input[placeholder="Project Title"]').value,
-            message: form.querySelector('textarea').value
+
+            name:
+            document.getElementById("name").value,
+
+            email:
+            document.getElementById("email").value,
+
+            phone:
+            document.getElementById("phone").value,
+
+            project:
+            document.getElementById("project").value,
+
+            message:
+            document.getElementById("message").value
+
         };
 
         try {
 
-            const response = await fetch(WEB_APP_URL, {
+            const response =
+            await fetch(WEB_APP_URL, {
+
                 method: "POST",
+
                 headers: {
                     "Content-Type": "text/plain"
                 },
+
                 body: JSON.stringify(data)
+
             });
 
-            const result = await response.text();
+            const result =
+            await response.json();
 
             console.log(result);
 
-            alert("Project Request Submitted Successfully!");
+            if (result.success) {
 
-            form.reset();
+                alert(
+                    "Project Request Submitted Successfully!"
+                );
 
-        } catch (error) {
+                form.reset();
 
-            console.error(error);
+            } else {
 
-            alert("Failed to send request. Check Apps Script.");
+                alert(
+                    "Submission Failed : " +
+                    result.error
+                );
+
+            }
 
         }
 
-        submitBtn.innerText = "Submit Request";
+        catch (error) {
+
+            console.error(error);
+
+            alert(
+                "Connection Failed"
+            );
+
+        }
+
         submitBtn.disabled = false;
+
+        submitBtn.innerText =
+        "Submit Request";
 
     });
 

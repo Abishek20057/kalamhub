@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Activity Upload | Kalam Hub Admin</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f8fafc;
+min-height:100vh;
+padding:40px 20px;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+background:#fff;
+padding:40px;
+border-radius:20px;
+box-shadow:0 15px 40px rgba(0,0,0,.1);
+}
+
+h1{
+text-align:center;
+color:#2563eb;
+margin-bottom:10px;
+}
+
+.subtitle{
+text-align:center;
+color:#64748b;
+margin-bottom:30px;
+}
+
+.form-group{
+margin-bottom:20px;
+}
+
+label{
+display:block;
+font-weight:600;
+margin-bottom:8px;
+}
+
+input,
+textarea{
+width:100%;
+padding:15px;
+border:1px solid #dbeafe;
+border-radius:12px;
+font-size:16px;
+}
+
+textarea{
+height:150px;
+resize:none;
+}
+
+button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+background:#2563eb;
+color:white;
+font-size:16px;
+font-weight:700;
+cursor:pointer;
+transition:.3s;
+}
+
+button:hover{
+background:#1d4ed8;
+}
+
+button:disabled{
+background:#94a3b8;
+cursor:not-allowed;
+}
+
+.success{
+display:none;
+margin-top:20px;
+padding:15px;
+border-radius:10px;
+background:#dcfce7;
+color:#166534;
+text-align:center;
+font-weight:600;
+}
+
+.error{
+display:none;
+margin-top:20px;
+padding:15px;
+border-radius:10px;
+background:#fee2e2;
+color:#991b1b;
+text-align:center;
+font-weight:600;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Activity Upload</h1>
+
+<p class="subtitle">
+Upload Workshops, Events, Client Projects and Training Activities
+</p>
+
+<form id="activityForm">
+
+<div class="form-group">
+<label>Activity Title</label>
+<input
+type="text"
+id="title"
+placeholder="Embedded Systems Workshop"
+required>
+</div>
+
+<div class="form-group">
+<label>Activity Description</label>
+<textarea
+id="description"
+placeholder="Describe the activity..."
+required></textarea>
+</div>
+
+<div class="form-group">
+<label>Activity Image URL</label>
+<input
+type="text"
+id="image"
+placeholder="https://your-image-url.com/image.jpg"
+required>
+</div>
+
+<button
+type="submit"
+id="submitBtn">
+
+Upload Activity
+
+</button>
+
+</form>
+
+<div
+id="successMsg"
+class="success">
+
+Activity Uploaded Successfully
+
+</div>
+
+<div
+id="errorMsg"
+class="error">
+
+Upload Failed
+
+</div>
+
+</div>
+
+<script>
+
+const WEB_APP_URL =
+"https://script.google.com/macros/s/AKfycbyCkmRwo8kA8TyALX50UKMnOCorLwObJ27a5XCC0-EAEoDNEv1sW0wZwKwE70UNzBOZOA/exec";
+
+document
+.getElementById("activityForm")
+.addEventListener(
+"submit",
+async function(e){
+
+e.preventDefault();
+
+const btn =
+document.getElementById("submitBtn");
+
+btn.disabled = true;
+btn.innerText = "Uploading...";
+
+document.getElementById("successMsg").style.display = "none";
+document.getElementById("errorMsg").style.display = "none";
+
+const data = {
+
+action:"addActivity",
+
+title:
+document.getElementById("title").value,
+
+description:
+document.getElementById("description").value,
+
+image:
+document.getElementById("image").value
+
+};
+
+try{
+
+const response =
+await fetch(
+WEB_APP_URL,
+{
+method:"POST",
+headers:{
+"Content-Type":"text/plain"
+},
+body:JSON.stringify(data)
+}
+);
+
+const result =
+await response.json();
+
+if(result.success){
+
+document.getElementById(
+"successMsg"
+).style.display = "block";
+
+document
+.getElementById("activityForm")
+.reset();
+
+}
+else{
+
+document.getElementById(
+"errorMsg"
+).style.display = "block";
+
+}
+
+}
+catch(error){
+
+console.error(error);
+
+document.getElementById(
+"errorMsg"
+).style.display = "block";
+
+}
+
+btn.disabled = false;
+btn.innerText = "Upload Activity";
+
+});
+
+</script>
+<script src="js/logout.js"></script>
+</body>
+
+</html>

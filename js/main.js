@@ -1,77 +1,249 @@
-// =========================
-// KALAM HUB - MAIN.JS
-// =========================
+// ==========================================
+// KALAM HUB 4.0 PREMIUM MAIN.JS
+// ==========================================
 
-// Navbar Shadow on Scroll
+document.addEventListener("DOMContentLoaded", () => {
 
-window.addEventListener("scroll", () => {
+    console.log(`
+=================================
+        KALAM HUB
+ Where Ideas Become Innovation
+=================================
+    `);
+
+    // ==========================
+    // NAVBAR SHADOW ON SCROLL
+    // ==========================
 
     const navbar = document.querySelector(".navbar");
 
-    if (window.scrollY > 50) {
-        navbar.style.boxShadow = "0 8px 25px rgba(0,0,0,0.1)";
-    } else {
-        navbar.style.boxShadow = "0 5px 20px rgba(0,0,0,0.05)";
-    }
+    window.addEventListener("scroll", () => {
 
-});
+        if (!navbar) return;
 
-// Smooth Fade-In Animation
+        if (window.scrollY > 50) {
 
-const observer = new IntersectionObserver((entries) => {
+            navbar.style.background =
+                "rgba(255,255,255,0.98)";
 
-    entries.forEach((entry) => {
+            navbar.style.boxShadow =
+                "0 10px 30px rgba(0,0,0,0.12)";
 
-        if (entry.isIntersecting) {
-            entry.target.classList.add("show");
+        } else {
+
+            navbar.style.background =
+                "rgba(255,255,255,0.95)";
+
+            navbar.style.boxShadow =
+                "0 5px 20px rgba(0,0,0,0.08)";
         }
 
     });
 
-}, {
-    threshold: 0.1
-});
+    // ==========================
+    // ACTIVE NAVIGATION
+    // ==========================
 
-document.querySelectorAll(
-    ".about, .services, .projects, .contact, .service-card, .project-card"
-).forEach((el) => {
-    observer.observe(el);
-});
+    const currentPage =
+        window.location.pathname.split("/").pop();
 
-// Button Click Animation
+    document
+        .querySelectorAll(".nav-links a")
+        .forEach(link => {
 
-document.querySelectorAll(
-    ".btn-primary, .btn-secondary"
-).forEach((button) => {
+            const href = link.getAttribute("href");
 
-    button.addEventListener("click", () => {
+            if (href === currentPage) {
 
-        button.style.transform = "scale(0.95)";
+                link.style.color = "#2563eb";
+                link.style.fontWeight = "700";
+            }
 
-        setTimeout(() => {
-            button.style.transform = "scale(1)";
-        }, 150);
+        });
+
+    // ==========================
+    // SCROLL REVEAL ANIMATION
+    // ==========================
+
+    const revealElements =
+        document.querySelectorAll(
+            ".about, .services, .projects, .contact, .gallery, .service-card, .project-card, .gallery-card"
+        );
+
+    revealElements.forEach(el => {
+
+        el.style.opacity = "0";
+        el.style.transform = "translateY(50px)";
+        el.style.transition =
+            "all 0.8s ease";
 
     });
 
+    const revealObserver =
+        new IntersectionObserver(entries => {
+
+            entries.forEach(entry => {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.style.opacity = "1";
+
+                    entry.target.style.transform =
+                        "translateY(0)";
+                }
+
+            });
+
+        }, {
+            threshold: 0.15
+        });
+
+    revealElements.forEach(el => {
+        revealObserver.observe(el);
+    });
+
+    // ==========================
+    // BUTTON CLICK EFFECT
+    // ==========================
+
+    document
+        .querySelectorAll(
+            ".btn-primary, .btn-secondary"
+        )
+        .forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                button.style.transform =
+                    "scale(0.95)";
+
+                setTimeout(() => {
+
+                    button.style.transform =
+                        "scale(1)";
+
+                }, 150);
+
+            });
+
+        });
+
+    // ==========================
+    // PROJECT CARD HOVER GLOW
+    // ==========================
+
+    document
+        .querySelectorAll(
+            ".project-card, .service-card"
+        )
+        .forEach(card => {
+
+            card.addEventListener("mouseenter", () => {
+
+                card.style.boxShadow =
+                    "0 20px 45px rgba(37,99,235,0.25)";
+
+            });
+
+            card.addEventListener("mouseleave", () => {
+
+                card.style.boxShadow = "";
+
+            });
+
+        });
+
+    // ==========================
+    // COUNTER ANIMATION
+    // ==========================
+
+    const counters =
+        document.querySelectorAll(".counter");
+
+    const counterObserver =
+        new IntersectionObserver(entries => {
+
+            entries.forEach(entry => {
+
+                if (!entry.isIntersecting) return;
+
+                const counter =
+                    entry.target;
+
+                const target =
+                    parseInt(
+                        counter.dataset.target
+                    );
+
+                let current = 0;
+
+                const increment =
+                    Math.ceil(target / 100);
+
+                const updateCounter = () => {
+
+                    current += increment;
+
+                    if (current >= target) {
+
+                        counter.innerText =
+                            target + "+";
+
+                    } else {
+
+                        counter.innerText =
+                            current + "+";
+
+                        requestAnimationFrame(
+                            updateCounter
+                        );
+                    }
+
+                };
+
+                updateCounter();
+
+                counterObserver.unobserve(counter);
+
+            });
+
+        });
+
+    counters.forEach(counter => {
+
+        counterObserver.observe(counter);
+
+    });
+
+    // ==========================
+    // FOOTER YEAR
+    // ==========================
+
+    const footerYear =
+        document.querySelector(
+            ".footer-year"
+        );
+
+    if (footerYear) {
+
+        footerYear.innerText =
+            new Date().getFullYear();
+
+    }
+
+    // ==========================
+    // PAGE LOADER EFFECT
+    // ==========================
+
+    document.body.style.opacity = "0";
+
+    setTimeout(() => {
+
+        document.body.style.transition =
+            "opacity 0.8s ease";
+
+        document.body.style.opacity = "1";
+
+    }, 100);
+
 });
-
-// Dynamic Footer Year
-
-const footerText = document.querySelector("footer p:last-child");
-
-if (footerText) {
-
-    footerText.innerHTML =
-        `© ${new Date().getFullYear()} Kalam Hub. All Rights Reserved.`;
-
-}
-
-// Console Branding
-
-console.log(`
-=================================
-       KALAM HUB
- Where Ideas Become Innovation
-=================================
-`);

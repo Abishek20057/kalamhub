@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gallery Upload | Kalam Hub Admin</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+background:#f8fafc;
+padding:40px;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+background:white;
+padding:40px;
+border-radius:20px;
+box-shadow:0 10px 30px rgba(0,0,0,.1);
+}
+
+h1{
+text-align:center;
+color:#2563eb;
+margin-bottom:30px;
+}
+
+.form-group{
+margin-bottom:20px;
+}
+
+label{
+display:block;
+font-weight:600;
+margin-bottom:10px;
+}
+
+input,
+select{
+width:100%;
+padding:15px;
+border:1px solid #ddd;
+border-radius:12px;
+}
+
+button{
+width:100%;
+padding:15px;
+border:none;
+border-radius:12px;
+background:#2563eb;
+color:white;
+font-weight:700;
+cursor:pointer;
+}
+
+button:hover{
+background:#1d4ed8;
+}
+
+.preview{
+margin-top:40px;
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+}
+
+.card{
+background:white;
+border-radius:15px;
+overflow:hidden;
+box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+.card img{
+width:100%;
+height:200px;
+object-fit:cover;
+}
+
+.card h3{
+padding:15px;
+text-align:center;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Gallery Upload</h1>
+
+<form id="galleryForm">
+
+<div class="form-group">
+
+<label>Photo Title</label>
+
+<input
+type="text"
+id="title"
+required>
+
+</div>
+
+<div class="form-group">
+
+<label>Category</label>
+
+<select id="category">
+
+<option>Workshop</option>
+<option>Client Project</option>
+<option>Training</option>
+<option>Event</option>
+<option>IoT Project</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Image URL</label>
+
+<input
+type="text"
+id="image"
+placeholder="assets/images/photo1.jpeg"
+required>
+
+</div>
+
+<button type="submit">
+
+Upload Photo
+
+</button>
+
+</form>
+
+<div
+class="preview"
+id="galleryPreview">
+
+</div>
+
+</div>
+
+<script>
+
+let galleryData =
+JSON.parse(
+localStorage.getItem("gallery")
+) || [];
+
+function renderGallery(){
+
+const preview =
+document.getElementById(
+"galleryPreview"
+);
+
+preview.innerHTML = "";
+
+galleryData.forEach(item=>{
+
+preview.innerHTML += `
+
+<div class="card">
+
+<img
+src="${item.image}"
+alt="${item.title}">
+
+<h3>${item.title}</h3>
+
+</div>
+
+`;
+
+});
+
+}
+
+renderGallery();
+
+document
+.getElementById("galleryForm")
+.addEventListener("submit",function(e){
+
+e.preventDefault();
+
+const photo={
+
+title:
+document.getElementById("title").value,
+
+category:
+document.getElementById("category").value,
+
+image:
+document.getElementById("image").value
+
+};
+
+galleryData.push(photo);
+
+localStorage.setItem(
+"gallery",
+JSON.stringify(galleryData)
+);
+
+renderGallery();
+
+alert("Photo Uploaded Successfully");
+
+this.reset();
+
+});
+
+</script>
+<script src="js/logout.js"></script>
+</body>
+
+</html>

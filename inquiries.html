@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Customer Inquiries | Kalam Hub</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+.container{
+padding:120px 8%;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+background:white;
+box-shadow:0 10px 30px rgba(0,0,0,.1);
+border-radius:15px;
+overflow:hidden;
+}
+
+th{
+background:#2563eb;
+color:white;
+padding:15px;
+}
+
+td{
+padding:15px;
+border-bottom:1px solid #eee;
+}
+
+tr:hover{
+background:#f8fafc;
+}
+
+.action-btn{
+padding:8px 15px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+color:white;
+font-weight:600;
+}
+
+.delete-btn{
+background:#ef4444;
+}
+
+.status-btn{
+background:#22c55e;
+}
+
+@media(max-width:768px){
+
+table{
+display:block;
+overflow-x:auto;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav class="navbar">
+
+<div class="logo">
+
+<img
+src="assets/images/kalam-hub-logo.jpeg"
+alt="Kalam Hub">
+
+<span>Kalam Hub</span>
+
+</div>
+
+<ul class="nav-links">
+
+<li><a href="admin-dashboard.html">Dashboard</a></li>
+<li><a href="activity-upload.html">Activities</a></li>
+<li><a href="testimonial.html">Testimonials</a></li>
+<li><a href="partners.html">Partners</a></li>
+</ul>
+
+</nav>
+
+<div class="container">
+
+<h1 style="margin-bottom:30px;">
+Customer Inquiries
+</h1>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Name</th>
+<th>Email</th>
+<th>Phone</th>
+<th>Project</th>
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="inquiriesTable">
+
+<tr>
+
+<td colspan="5">
+Loading...
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<script src="js/inquiries.js"></script>
+
+</body>
+
+</html>
