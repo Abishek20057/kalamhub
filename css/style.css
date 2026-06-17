@@ -522,6 +522,46 @@ text-align:center;
 }
 
 /* =========================
+ACTIVITIES GALLERY FIX
+========================= */
+
+#activitiesContainer{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(320px,1fr));
+gap:30px;
+}
+
+#activitiesContainer .project-card{
+overflow:hidden;
+border-radius:20px;
+}
+
+#activitiesContainer .project-card img{
+
+width:100%;
+
+aspect-ratio:1/1;
+
+object-fit:cover;
+
+display:block;
+
+}
+
+.activity-image{
+
+width:100%;
+
+aspect-ratio:1/1;
+
+object-fit:cover;
+
+display:block;
+
+}
+
+/* =========================
    CONTACT FORM
 ========================= */
 

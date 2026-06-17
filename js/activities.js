@@ -76,8 +76,8 @@ async function loadActivities() {
             <div class="project-card">
 
                 <img
-                src="${activity[4]}"
-                alt="${activity[2]}">
+src="${activity[4]}"
+alt="${activity[2]}">
 
                 <h3>
                     ${activity[2]}
